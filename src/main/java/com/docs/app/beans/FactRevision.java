@@ -2,14 +2,14 @@ package com.docs.app.beans;
 
 import java.util.Date;
 
-public class ArticleRevision {
-	private Article article;
+public class FactRevision {
+	private Fact fact;
 	private Date dateAdded;
 	private int id;
 	private User author;
 	
-	public Article getArticle() {
-		return article;
+	public Fact getfact() {
+		return fact;
 	}
 	
 	public User getAuthor() {
@@ -24,8 +24,8 @@ public class ArticleRevision {
 		return id;
 	}
 	
-	public void setArticle(final Article article) {
-		this.article = article;
+	public void setfact(final Fact fact) {
+		this.fact = fact;
 	}
 	
 	public void setAuthor(final User author) {

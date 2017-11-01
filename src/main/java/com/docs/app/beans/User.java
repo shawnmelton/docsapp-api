@@ -9,7 +9,12 @@ public class User {
 	private String firstName;
 	private int id;
 	private String lastName;
+	private String password;
 	private String screenName;
+	
+	public void clearPassword() {
+		this.password = "#########";
+	}
 	
 	public Date getDateAdded() {
 		return dateAdded;
@@ -33,6 +38,10 @@ public class User {
 	
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 	
 	public String getScreenName() {
@@ -61,6 +70,10 @@ public class User {
 	
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public void setPassword(final String password) {
+		this.password = password;
 	}
 	
 	public void setScreenName(String screenName) {

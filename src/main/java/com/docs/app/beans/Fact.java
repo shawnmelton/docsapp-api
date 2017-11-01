@@ -3,13 +3,13 @@ package com.docs.app.beans;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Article {
+public class Fact {
 	private ArrayList<Category> categories;
 	private String content;
 	private Date dateAdded;
 	private Date dateUpdated;
 	private int id;
-	private ArrayList<ArticleRevision> revisions;
+	private ArrayList<FactRevision> revisions;
 	private String title;
 	
 	public ArrayList<Category> getCategories() {
@@ -32,7 +32,7 @@ public class Article {
 		return id;
 	}
 	
-	public ArrayList<ArticleRevision> getRevisions() {
+	public ArrayList<FactRevision> getRevisions() {
 		return revisions;
 	}
 	
@@ -60,7 +60,7 @@ public class Article {
 		this.id = id;
 	}
 	
-	public void setRevisions(ArrayList<ArticleRevision> revisions) {
+	public void setRevisions(ArrayList<FactRevision> revisions) {
 		this.revisions = revisions;
 	}
 	

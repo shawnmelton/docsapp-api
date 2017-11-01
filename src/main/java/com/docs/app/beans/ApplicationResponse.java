@@ -72,14 +72,14 @@ public class ApplicationResponse<T> {
 	}
 
 	private class ApplicationResponseResult<T> {
-		private T result;
+		private T data;
 		
-		public ApplicationResponseResult(final T result) {
-			this.result = result;
+		public ApplicationResponseResult(final T data) {
+			this.data = data;
 		}
 		
-		public T getResult() {
-			return this.result;
+		public T getData() {
+			return this.data;
 		}
 	}
 }

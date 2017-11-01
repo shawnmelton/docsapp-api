@@ -8,25 +8,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.docs.app.beans.ApplicationResponse;
 import com.docs.app.beans.ApplicationResponse.ApplicationResponseType;
-import com.docs.app.beans.Article;
-import com.docs.app.services.ArticlesService;
+import com.docs.app.beans.Fact;
+import com.docs.app.services.FactsService;
 
 @RestController
 @RequestMapping("/articles")
-public class Articles extends BaseController {
+public class Facts extends BaseController {
 	@Autowired
-	private ArticlesService service;
+	private FactsService service;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
-	public ApplicationResponse<Article> getById(@PathVariable final int id) {
-		final Article article = this.service.findById(id);
+	public ApplicationResponse<Fact> getById(@PathVariable final int id) {
+		final Fact fact = this.service.findById(id);
 		ApplicationResponseType responseType = ApplicationResponseType.NOT_FOUND;
-		if (article != null) {
+		if (fact != null) {
 			responseType = ApplicationResponseType.OK;
 		}
 		
-		final ApplicationResponse<Article> response = new ApplicationResponse<Article>();
-		response.setResult(article);
+		final ApplicationResponse<Fact> response = new ApplicationResponse<Fact>();
+		response.setResult(fact);
 		response.setType(responseType);
 		return response;
 	}

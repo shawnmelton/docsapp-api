@@ -26,12 +26,13 @@ public class Users extends BaseController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ApplicationResponse<String> create(@RequestParam(required=true) final String firstName,
 		@RequestParam(required=true) final String lastName, @RequestParam(required=true) final String emailAddress,
-		@RequestParam(required=true) final String screenName) {
+		@RequestParam(required=true) final String screenName, @RequestParam(required=true) final String password) {
 		final User body = new User();
 		body.setFirstName(firstName);
 		body.setLastName(lastName);
 		body.setEmailAddress(emailAddress);
 		body.setScreenName(screenName);
+		body.setPassword(password);
 			
 		if (this.userValidator.isValid(body)) {
 			final int userId = this.service.create(body);
@@ -51,6 +52,7 @@ public class Users extends BaseController {
 		ApplicationResponseType responseType = ApplicationResponseType.NOT_FOUND;
 		if (user != null) {
 			responseType = ApplicationResponseType.OK;
+			user.clearPassword();
 		}
 		
 		final ApplicationResponse<User> response = new ApplicationResponse<User>();
@@ -65,6 +67,7 @@ public class Users extends BaseController {
 		ApplicationResponseType responseType = ApplicationResponseType.NOT_FOUND;
 		if (user != null) {
 			responseType = ApplicationResponseType.OK;
+			user.clearPassword();
 		}
 		
 		final ApplicationResponse<User> response = new ApplicationResponse<User>();

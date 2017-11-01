@@ -5,37 +5,37 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.docs.app.beans.Article;
 import com.docs.app.beans.DatabaseResultItem;
 import com.docs.app.beans.DatabaseResultItem.DatabaseResultItemType;
+import com.docs.app.beans.Fact;
 import com.docs.app.services.DatabaseClient;
 
 @Repository
-public class ArticlesRepo {
+public class FactsRepo {
 	@Autowired
 	private DatabaseClient dbClient;
 	
-	public Article read(final int id) {
+	public Fact read(final int id) {
 		final ArrayList<DatabaseResultItem> columns = new ArrayList<DatabaseResultItem>();
-		columns.add(new DatabaseResultItem("article_id", DatabaseResultItemType.INTEGER));
-		columns.add(new DatabaseResultItem("article_title", DatabaseResultItemType.INTEGER));
-		columns.add(new DatabaseResultItem("article_content", DatabaseResultItemType.INTEGER));
+		columns.add(new DatabaseResultItem("fact_id", DatabaseResultItemType.INTEGER));
+		columns.add(new DatabaseResultItem("fact_title", DatabaseResultItemType.INTEGER));
+		columns.add(new DatabaseResultItem("fact_content", DatabaseResultItemType.INTEGER));
 		
 		final ArrayList<Object> params = new ArrayList<Object>();
 		params.add(id);
 		
 		final ArrayList<Object> results = this.dbClient.query(""
-				+ "SELECT article_id, article_title, article_content "
-				+ "FROM articles "
-				+ "WHERE article_id = ? "
+				+ "SELECT fact_id, fact_title, fact_content "
+				+ "FROM facs "
+				+ "WHERE fact_id = ? "
 				+ "LIMIT 1", params, columns);
 		
 		if (results != null && results.size() > 0) {
-			final Article article = new Article();
-			article.setId((Integer) results.get(0));
-			article.setTitle((String) results.get(1));
-			article.setContent((String) results.get(2));
-			return article;
+			final Fact fact = new Fact();
+			fact.setId((Integer) results.get(0));
+			fact.setTitle((String) results.get(1));
+			fact.setContent((String) results.get(2));
+			return fact;
 		}
 		
 		return null;

@@ -22,16 +22,18 @@ public class UsersRepo {
 		params.add(user.getLastName());
 		params.add(user.getEmailAddress());
 		params.add(user.getScreenName());
+		params.add(user.getPassword());
 		
 		final ArrayList<DatabaseResultItem> columns = new ArrayList<DatabaseResultItem>();
 		columns.add(new DatabaseResultItem("user_id", DatabaseResultItemType.INTEGER));
 		
-		this.dbClient.query("INSERT INTO users "
-				+ "(user_first_name, user_last_name, user_email_address, user_screen_name) "
-				+ "VALUES (?, ?, ?, ?)"
+		final ArrayList<Object> results = this.dbClient.query("INSERT INTO users "
+				+ "(user_first_name, user_last_name, user_email_address, user_screen_name, user_password) "
+				+ "VALUES (?, ?, ?, ?, ?)"
 				+ "RETURNING user_id", params, columns);
 		
-		return 0;
+		final int lastInsertId = results.size() > 0 ? (Integer) results.get(0) : 0;
+		return lastInsertId;
 	}
 	
 	/**
@@ -46,6 +48,7 @@ public class UsersRepo {
 		columns.add(new DatabaseResultItem("user_last_name", DatabaseResultItemType.STRING));
 		columns.add(new DatabaseResultItem("user_email_address", DatabaseResultItemType.STRING));
 		columns.add(new DatabaseResultItem("user_screen_name", DatabaseResultItemType.STRING));
+		columns.add(new DatabaseResultItem("user_password", DatabaseResultItemType.STRING));
 		
 		final ArrayList<Object> params = new ArrayList<Object>();
 		
@@ -59,7 +62,7 @@ public class UsersRepo {
 		}
 		
 		final ArrayList<Object> results = this.dbClient.query(""
-				+ "SELECT user_id, user_first_name, user_last_name, user_email_address, user_screen_name "
+				+ "SELECT user_id, user_first_name, user_last_name, user_email_address, user_screen_name, user_password "
 				+ "FROM users "
 				+ "WHERE "+ paramName +" = ? "
 				+ "LIMIT 1", params, columns);
@@ -71,6 +74,7 @@ public class UsersRepo {
 			user.setLastName((String) results.get(2));
 			user.setEmailAddress((String) results.get(3));
 			user.setScreenName((String) results.get(4));
+			user.setPassword((String) results.get(5)); 
 			return user;
 		}
 		
